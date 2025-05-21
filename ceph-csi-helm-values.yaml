@@ -1,0 +1,26 @@
+---
+csiConfig:
+  - clusterID: a7d2a669-eed9-40e3-8e5f-9febd9ae7504
+    monitors:
+      - 172.16.41.10:6789
+      - 172.16.41.20:6789
+      - 172.16.41.40:6789
+    cephFS:
+      subvolumeGroup: "csi"
+secret:
+  name: csi-cephfs-secret
+  adminID: admin
+  adminKey: AQAgh5xm4nOhFBAAOD2X21aHPEeFMOuhMIVpmg==
+  create: true
+storageClass:
+  create: true
+  name: csi-cephfs-sc
+  clusterID: a7d2a669-eed9-40e3-8e5f-9febd9ae7504
+  # (required) CephFS filesystem name into which the volume shall be created
+  fsName: cephfs_k3s
+  reclaimPolicy: Delete
+  allowVolumeExpansion: true
+  volumeNamePrefix: "poc-k3s-"
+  provisionerSecret: csi-cephfs-secret
+  controllerExpandSecret: csi-cephfs-secret
+  nodeStageSecret: csi-cephfs-secret
